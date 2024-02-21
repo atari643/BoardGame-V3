@@ -6,9 +6,10 @@ interface BoardProps {
     ligne: number;
     collum: number;
     player: string;
+    type : string;
 }
 
-const Board: React.FC<BoardProps> = ({ ligne, collum, player }) => {
+const Board: React.FC<BoardProps> = ({ ligne, collum, player, type }) => {
 
     const [currentPlayer, setPlayer] = React.useState<string>(player);    // Create the board based on the size
     const [currentLetter, setLetter] = React.useState<string>("W"); // Create the board based on the size

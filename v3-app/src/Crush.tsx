@@ -10,7 +10,7 @@ interface GameProps {
 const Crush = ({ ligne, collum, player="W" }: GameProps) => {
     return (
         <div>
-            <Board ligne={ligne} collum={collum} player={player} />
+            <Board ligne={ligne} collum={collum} player={player} type="Crush" />
         </div>
     );
 }
