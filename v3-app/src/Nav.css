@@ -1,0 +1,10 @@
+/* FILEPATH: /mnt/netta/users/qartigala/Bureau/boardgame-v3/v3-app/src/Nav.css */
+
+.nav {
+  background-color: #f8f8f8;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
