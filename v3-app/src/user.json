@@ -1,0 +1,23 @@
+{
+    "users": [
+      {
+        "id": 1,
+        "login": "nJournet",
+        "nbVictoires": 4,
+        "nbDefaites": 3
+      },
+      {
+        "id": 2,
+        "login": "sFosse",
+        "nbVictoires": 1,
+        "nbDefaites": 5
+      },
+      {
+        "id": 3,
+        "login": "eLeon",
+        "nbVictoires": 8,
+        "nbDefaites": 0
+      }
+    ]
+  }
+  

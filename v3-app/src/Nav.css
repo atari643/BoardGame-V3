@@ -1,10 +1,48 @@
-/* FILEPATH: /mnt/netta/users/qartigala/Bureau/boardgame-v3/v3-app/src/Nav.css */
+/* FILEPATH: /mnt/netta/users/qartigala/Bureau/boardgame-v3/v3-app/srcnav.css */
 
-.nav {
-  background-color: #f8f8f8;
-  height: 60px;
+nav {
+  background-color: blue;
+  overflow: hidden;
+  
+}
+.Nav>h1{
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+ 
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+}
+
+nav li {
+  display: inline;
+}
+
+nav button {
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+nav button:hover {
+  background-color: darkblue;
+}
+.content {
   align-items: center;
-  padding: 0 20px;
+  justify-content: center;
+  display: flex;
+  text-align: center;
 }

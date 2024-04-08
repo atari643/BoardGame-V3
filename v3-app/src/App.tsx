@@ -1,11 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Login from "./Login";
 import Crush from "./Crush";
 import Fill from "./Fill";
-import Nav from "./Nav";
 
-function App() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+interface AppProps {
+    userData: any;
+    logged: boolean;
+
+}
+
+function App({ userData, logged }: AppProps) {
+    const [isLoggedIn, setIsLoggedIn] = useState(() => {
+        const saved = sessionStorage.getItem('isLoggedIn');
+        const initialValue = JSON.parse(saved!);
+        return initialValue || logged;
+    });
+    const [usersData, setUsersData] = useState(() => {
+        const saved = sessionStorage.getItem('user');
+        const initialValue = JSON.parse(saved!);
+        return initialValue || userData;
+    });
+    const [looser, setLooser] = useState(()=>{
+        const saved = sessionStorage.getItem('looser');
+        const initialValue = JSON.parse(saved!);
+        return initialValue || false;
+    });
     const [selectedGame, setSelectedGame] = useState("");
     const [selectedDifficulty, setSelectedDifficulty] = useState("");
 
@@ -21,15 +40,23 @@ function App() {
         const allowedPaths = ["/Play"];
         return allowedPaths.includes(window.location.pathname);
     };
+    useEffect(() => {
+        console.log(sessionStorage.getItem('looser'));
+        if (sessionStorage.getItem('looser')) {
+            setLooser(false);
+        }
 
+    });
     return (
         <div>
             {isAllowedPath() ? (
                 <div>
-                    <h1>Please log in to Access BoardGames </h1>
                     {isLoggedIn ? (
                         <div>
                             <h2>Welcome to BoardGames</h2>
+                            <p className="loginName">Welcome {usersData.login}</p>
+                            <p className="victory">Victories: {usersData.nbVictoires}</p>
+                            <p className="defeat">Defeats: {usersData.nbDefaites}</p>
                             <p>Here you can play all the board games you want</p>
                             <select value={selectedGame} onChange={handleGameChange}>
                                 <option value="Choose">Choose a game</option>
@@ -60,9 +87,10 @@ function App() {
                             {selectedGame === "Fill" && selectedDifficulty === "Hard" && (
                                 <Fill ligne={7} collum={7} player={"B"} />
                             )}
+                            {looser ? (<div className="looser">You lost <button onClick={() => window.location.reload()}>Play again</button></div>) : null}
                         </div>
                     ) : (
-                        <Login isAuthenticated={isLoggedIn} setIsAuthenticated={setIsLoggedIn} />
+                        <Login setIsAuthenticated={setIsLoggedIn} setUserData={(userData: any) => setUsersData(userData)} />
                     )}
                 </div>
             ) : null}

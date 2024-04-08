@@ -7,9 +7,29 @@ table th,
 table td {
   padding: 8px;
   text-align: left;
-  border-bottom: 1px solid #ddd;
 }
 
 table th {
   background-color: #f2f2f2;
+}
+td {
+  background-color: whitesmoke;
+  border: 1px solid black;
+  /* Bordure de 1 pixel de couleur noire */
+  width: 50px;
+  /* Largeur de chaque cellule (ajustez-la selon vos besoins) */
+  height: 50px;
+  /* Hauteur de chaque cellule (ajustez-la selon vos besoins) */
+  text-align: center;
+  /* Alignement du texte au centre de la cellule */
+}
+
+td.black {
+  background-color: black;
+  color: white;
+}
+
+td.white {
+  background-color: white;
+  color: black;
 }

@@ -11,26 +11,35 @@ interface BoardProps {
 
 const Board: React.FC<BoardProps> = ({ ligne, collum, player, type }) => {
 
-    const [currentPlayer, setPlayer] = React.useState<string>(player);    // Create the board based on the size
-    const [currentLetter, setLetter] = React.useState<string>("W"); // Create the board based on the size
-
+    const [currentPlayer, setPlayer] = React.useState<string>(player);    
+    const [currentLetter, setLetter] = React.useState<string>("W");
+    const [usersData, setUsersData] = React.useState(() => {
+        const saved = sessionStorage.getItem('user');
+        const initialValue = JSON.parse(saved!);
+        return initialValue || null;
+    });
+    const [looser, setLooser] = React.useState<boolean>(false);
     const handleCellClick = (cel: any) => {
-        if (cel.newLetter === "") {
+        if (cel.newLetter === "" && !looser) {
             if (currentPlayer === "B") {
                 setPlayer("W");
             }
             else {
                 setPlayer("B");
             }
-            setLetter(currentPlayer); // Mettre à jour la lettre actuelle avec la lettre du joueur courant
+            setLetter(currentPlayer); 
             cel.letter = currentPlayer;
             return cel.letter;
-        } else {
-            return cel.newLetter;
+        } else if (cel.newLetter !== currentPlayer && !looser) {
+            setLooser(true);
+            sessionStorage.setItem('looser', JSON.stringify(true));
+            usersData.nbDefaites+=1;
+            setUsersData(usersData);
+            sessionStorage.setItem('user', JSON.stringify(usersData));
+            return cel.letter;
+            
         }
     };
-
-
     const board = Array.from({ length: ligne }, () =>
         Array.from({ length: collum }, () => (
             <Cellule
@@ -49,7 +58,7 @@ const Board: React.FC<BoardProps> = ({ ligne, collum, player, type }) => {
                     {board.map((row, rowIndex) => (
                         <tr key={rowIndex}>
                             {row.map((cell, cellIndex) => (
-                                <td key={cellIndex}>
+                                <td key={cellIndex} >
                                     <Cellule
                                         letter={cell.props.letter}
                                         ligne={rowIndex}
